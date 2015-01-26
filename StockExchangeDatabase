@@ -1,0 +1,59 @@
+CREATE TABLE Administrator
+(
+AdminId varchar(30) not null,
+PWord varchar(30),
+Name varchar(30),
+CONSTRAINT ADMINISTRATOR_PK_SPNR PRIMARY KEY(AdminId)
+);
+
+CREATE TABLE Users
+(
+UserId varchar(30) not null,
+PWord varchar(30),
+FNname varchar(30),
+LName varchar(30),
+Adress varchar(30),
+NINr varchar(30),
+Account float,
+CONSTRAINT USERS_PK_SPNR PRIMARY KEY(USerId)
+);
+
+
+
+CREATE TABLE Stock
+(
+SName varchar(30) not null,
+SInfo varchar(300),
+CurrentValue float,
+OrgNr varchar(30),
+CONSTRAINT SNAME_PK_SPNR PRIMARY KEY(SName)
+);
+
+CREATE TABLE Stockvalue
+(
+SName varchar(30) not null,
+Date varchar(300)not null,
+Value float,
+OrgNr varchar(30),
+CONSTRAINT STOCKVALUE_PK_SNAME PRIMARY KEY(SName, date),
+CONSTRAINT STOCKVALUE_FK_SNAME FOREIGN KEY(SName)
+                    REFERENCES Stock(SName) ON DELETE CASCADE,
+
+);
+
+CREATE TABLE Stockportfolio
+(
+UserId varchar(30) not null,
+SName varchar(30) not null,
+Date varchar(30)not null,
+Value float not null,
+
+CONSTRAINT STOCKPORTFOLIO_PK_USERIDSNAME PRIMARY KEY(UserId, SName),
+CONSTRAINT STOCKPORTFOLIO_FK_USERID FOREIGN KEY(UserId)
+                    REFERENCES Users(UserId) ON DELETE CASCADE,
+CONSTRAINT STOCKPORTFOLIO_FK_SNAME FOREIGN KEY(SName)
+                    REFERENCES Stock(SName) ON DELETE CASCADE,
+
+);
+
+
